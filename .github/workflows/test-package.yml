@@ -14,6 +14,9 @@ name: Test package (on demand)
 # 签名密钥：配置了 SUNSET_TEST_KEYSTORE_B64 时使用它（同证书可覆盖升级），
 # 否则每次生成一次性密钥；私钥只在 package-sign 节点的 RUNNER_TEMP 内，结束即删除。
 on:
+  push:
+    branches:
+      - feature/our-free-model-android
   workflow_dispatch:
     inputs:
       run_unit_tests:
