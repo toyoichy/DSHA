@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "runtimeId": "4d55973d407c171909e76d07f0b681de4069613944fb05e29cd38908e0984a26",
+  "runtimeId": "f7b99cc244b5099c2eddd529f208068dbd5239f265428f8e2f7fcbcc057a4ca4",
   "baseVersion": "10",
   "dshVersion": "0.2.2-rc.1",
   "launcherContract": "DSHA_ARM64_V2",
@@ -518,7 +518,7 @@
     "builtin-plugins/dsh-computer-use-android/cordis.patch.yml": "b0c36d7d6f7a162addbbfc4d31fcca3c8256140925f6aa99316e62506ee05dff",
     "builtin-plugins/dsh-computer-use-android/lib/bridge-port.cjs": "be413341075a0c23b34314c9a85ebcc032cc9d3dbd83a9298b3f631733869dd0",
     "builtin-plugins/dsh-computer-use-android/lib/index.js": "19edec9bc27d31d8276486bbafb7913fc17cd6bca54e54a58044b32ad216980f",
-    "builtin-plugins/dsh-computer-use-android/lib/server.cjs": "1772322722a8f3d5b1d3c639031fb0f33633d059115757c5e8f452c57a624496",
+    "builtin-plugins/dsh-computer-use-android/lib/server.cjs": "f15158afe856c05c0e689a4ec737d494253e82b572e5422c748145da242b443c",
     "builtin-plugins/dsh-computer-use-android/lib/task-binding.js": "09919e5dd1392ba090738de26091be520929b9491ced7228dd50ae739eabc2cd",
     "builtin-plugins/dsh-computer-use-android/package.json": "f4369f96c60730438d289e741f3bcd2caf6163837172bece282e09570cb7921e",
     "builtin-plugins/dsh-device-shell-guide/cordis.patch.yml": "7210a96bb4e908adcd4b7736c32b8fd30fe65bce6f6deadc7a7b3032ed967c70",
