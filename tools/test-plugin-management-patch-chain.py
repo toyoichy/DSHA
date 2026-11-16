@@ -25,7 +25,7 @@ OLD_RECIPE_SHA = '466c61d0fc0d180cd4828fb981a0851cf1721ced023163cf7e17469e1144b6
 # 模块字节随内置 DSH 上游与前序配方变化：build193（rc.3）时为 9f47fda9… / c1072ef0…，
 # 当前按 0.2.1-rc.5 canonical 与现行前序链重算。配方夹具本身（OLD_RECIPE_SHA）不变。
 OLD_MODULE_SHA = '8043321a15a77b0559a03165b253bf366ea04abc4397a808828d083e9c5d87ea'
-PRE_WORKER_SHA = '1eb661c0f36bcc5dcf47570f0c09ae26215bcf449031f218bc32bf6dc98a3d85'
+PRE_WORKER_SHA = '69ec30f2e69553b2ee3010af80d9d4887b90812588af7abbf8b13f2a1a3aa0ba'
 MANAGER = '@deepseek-ai/dsh-plugin-manager/lib/index.js'
 NEW_RECIPES = {WORKER, 'plugin-inventory-management-patch.json',
                'plugin-manager-management-probe-patch.json',
