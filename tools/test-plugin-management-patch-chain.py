@@ -206,7 +206,7 @@ def main():
         command.append('expect-broken')
     ran = subprocess.run(command, capture_output=True, timeout=60)
     (owned / 'java.log').write_bytes(ran.stdout + ran.stderr)
-    result = {'status': 'PASS' if ran.returncode == 0 else 'FAIL', 'exitCode': ran.returncode, 'expectedBrokenCurrent': args.expect_broken_current, 'modules': records, 'registrySha256': sha((assets / 'runtime-patches.json').read_bytes()), 'productionAlgorithmSha256': {name: sha((production / name).read_bytes()) for name in ['ManagedPatchChain.java', 'ExactTextPatch.java']}, 'historicalRecipeSha256': OLD_RECIPE_SHA, 'historicalModuleSha256': OLD_MODULE_SHA, 'apk': None if not args.apk else {'path': str(args.apk.resolve()), 'sha256': sha(args.apk.read_bytes())}, 'deviceValidation': False, 'output': str(owned)}
+    result = {'status': 'PASS' if ran.returncode == 0 else 'FAIL', 'exitCode': ran.returncode, 'expectedBrokenCurrent': args.expect_broken_current, 'modules': records, 'registrySha256': sha((assets / 'runtime-patches.json').read_bytes()), 'productionAlgorithmSha256': {name: sha((production / name).read_bytes()) for name in ['ManagedPatchChain.java', 'ExactTextPatch.java']}, 'historicalRecipeSha256': OLD_RECIPE_SHA, 'historicalModuleCompatibility': 'fail-closed-negative-on-current-runtime', 'apk': None if not args.apk else {'path': str(args.apk.resolve()), 'sha256': sha(args.apk.read_bytes())}, 'deviceValidation': False, 'output': str(owned)}
     (owned / 'result.json').write_bytes((json.dumps(result, indent=2) + '\n').encode())
     print(json.dumps(result))
     if ran.returncode:
