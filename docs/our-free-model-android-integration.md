@@ -59,3 +59,10 @@ The DSHA locked runtime currently pins DSH packages at `0.2.2-rc.1` and Cordis a
 - Install the exact APK on Android 16 / arm64 and verify first-run extraction, plugin install, chat, and upgrade without data loss.
 
 No APK is considered complete until the build artifact and its SHA-256 are available and the exact artifact has passed the stated software checks. Device acceptance must be reported separately.
+## Current implementation status (2026-11-17)
+
+The current branch adds a native shortcut in the Plugins market card. Tapping it opens the existing `PluginInstallActivity` with the exact GitHub Release URL, package name/version, and pinned SHA-256 above. The existing installer is expected to show its package preview and require the user to confirm installation.
+
+This is an install entry point, **not a pre-bundled plugin**. The plugin is not automatically present on a fresh install. After confirmation, the existing plugin installation pipeline performs acquisition and verification; runtime compatibility and actual plugin health still require validation. Free/anonymous channel access remains dependent on provider availability, quota, region, and policy.
+
+The source branch currently has not produced a verified APK, and no Android build, unit-test run, lint run, plugin startup test, or device acceptance result is claimed. Do not merge or publish as release-ready until those gates have evidence.
