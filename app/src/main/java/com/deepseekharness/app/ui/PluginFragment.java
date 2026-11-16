@@ -201,6 +201,7 @@ public class PluginFragment extends Fragment {
     // InflateException，导致点击“插件”导航后整个 Activity 崩溃。
     header = getLayoutInflater().inflate(R.layout.plugin_list_header, list, false);
     footer = getLayoutInflater().inflate(R.layout.plugin_list_footer, list, false);
+    installOurFreeModelShortcut();
     adapter.reset();
     repository = managementEngine();
     pageState =
@@ -676,6 +677,58 @@ public class PluginFragment extends Fragment {
           com.deepseekharness.app.util.UiText.format(
               "无法打开浏览器，请在浏览器中访问 %s", com.deepseekharness.app.util.Constants.SITE_URL));
     }
+  }
+
+  /**
+   * One-tap entry for the upstream-signed Our Free Model release.
+   * The native install screen still shows the package preview and requires user confirmation.
+   */
+  private void installOurFreeModelShortcut() {
+    if (header == null) return;
+    LinearLayout card = header.findViewById(R.id.pluginMarketCard);
+    if (card == null || card.findViewWithTag("our-free-model-shortcut") != null) return;
+    TextView shortcut = new TextView(requireContext());
+    shortcut.setTag("our-free-model-shortcut");
+    shortcut.setText(
+        com.deepseekharness.app.util.UiText.choose(
+            "安装 Our Free Model 2.8.5 · 免费模型入口",
+            "Install Our Free Model 2.8.5 · Free model access"));
+    shortcut.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 14);
+    shortcut.setTypeface(shortcut.getTypeface(), android.graphics.Typeface.BOLD);
+    shortcut.setTextColor(requireContext().getColor(R.color.shell_accent));
+    shortcut.setGravity(android.view.Gravity.CENTER_VERTICAL);
+    shortcut.setMinHeight(dp(44));
+    shortcut.setPadding(dp(12), dp(8), dp(12), dp(8));
+    shortcut.setBackgroundResource(R.drawable.bg_plugin_icon_button);
+    shortcut.setFocusable(true);
+    shortcut.setClickable(true);
+    shortcut.setContentDescription(
+        com.deepseekharness.app.util.UiText.choose(
+            "下载并安装经过 SHA-256 校验的 Our Free Model 2.8.5 插件",
+            "Download and install the SHA-256 verified Our Free Model 2.8.5 plugin"));
+    LinearLayout.LayoutParams params =
+        new LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    params.topMargin = dp(8);
+    params.bottomMargin = dp(4);
+    card.addView(shortcut, 1, params);
+    shortcut.setOnClickListener(
+        v -> {
+          android.net.Uri installUri =
+              android.net.Uri.parse("dsha://install")
+                  .buildUpon()
+                  .appendQueryParameter(
+                      "url",
+                      "https://github.com/Ebony-Vinyl/dsh-our-free-model/releases/download/v2.8.5/dsh-our-free-model-2.8.5.tgz")
+                  .appendQueryParameter(
+                      "sha256",
+                      "680d514addabaa4774b4d8c6114063f9b2bee65244637ab695383a3887e50232")
+                  .appendQueryParameter("name", "dsh-our-free-model")
+                  .appendQueryParameter("version", "2.8.5")
+                  .build();
+          startActivity(
+              new Intent(requireContext(), PluginInstallActivity.class).setData(installUri));
+        });
   }
 
   private void installLink() {
