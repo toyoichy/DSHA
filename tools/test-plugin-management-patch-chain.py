@@ -182,7 +182,7 @@ def main():
             # below still has to migrate them through the new recipe.
             pre_chain = [row for row in chain if row[0] not in {WORKER, 'plugin-pnpm-argv-patch.json'}]
             pre = runtime_stable_patches.apply(canonical, pre_chain)
-            assert sha(pre) == PRE_WORKER_SHA, 'pre-worker actual managed source identity'
+            assert sha(pre) == PRE_WORKER_SHA, 'pre-worker actual managed source identity: ' + sha(pre)
             historical_row = (WORKER, [(item['before'], item['after']) for item in historical['patches']], ['DSHA_PLUGIN_BUNDLE_READ_WORKERS_V1'])
             old_chain = pre_chain + [historical_row]
             old = runtime_stable_patches.apply(canonical, old_chain)
