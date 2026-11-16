@@ -91,7 +91,7 @@ const SCREEN_CONSTRAINTS = [
   ['android-no-multitouch', 'android', '单指滑动，不提供多指'],
   ['android-node-no-fallback', 'android', '节点动作被拒或 UNKNOWN 时不自动改用坐标手势、不重放'],
   ['android-explicit-switch', 'android', '须重新截图并明确选择'],
-  ['android-webview-verify', 'android', 'effectVerified:false 时要重新观察'],
+  ['android-webview-verify', 'android', 'effectVerified:false 时要核对实际界面'],
   ['android-control-scope', 'android:android_control', '仅实体主屏'],
   ['android-control-vscreen', 'android:android_control', '虚拟屏工具不需要也不调用它'],
   ['android-control-identity', 'android:android_control', '不由模型传入、不回退到全局活动任务、不新建聊天'],
