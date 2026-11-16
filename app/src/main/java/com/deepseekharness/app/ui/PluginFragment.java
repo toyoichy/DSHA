@@ -727,7 +727,7 @@ public class PluginFragment extends Fragment {
                   .appendQueryParameter("version", "2.8.5")
                   .build();
           startActivity(
-              new Intent(requireContext(), PluginInstallActivity.class).setData(installUri));
+              new android.content.Intent(requireContext(), PluginInstallActivity.class).setData(installUri));
         });
   }
 
