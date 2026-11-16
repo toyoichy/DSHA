@@ -721,13 +721,13 @@ public class PluginFragment extends Fragment {
                       "url",
                       "https://github.com/Ebony-Vinyl/dsh-our-free-model/releases/download/v2.8.5/dsh-our-free-model-2.8.5.tgz")
                   .appendQueryParameter(
-                      "sha256",
-                      "680d514addabaa4774b4d8c6114063f9b2bee65244637ab695383a3887e50232")
+                      "sha256", "680d514addabaa4774b4d8c6114063f9b2bee65244637ab695383a3887e50232")
                   .appendQueryParameter("name", "dsh-our-free-model")
                   .appendQueryParameter("version", "2.8.5")
                   .build();
           startActivity(
-              new android.content.Intent(requireContext(), PluginInstallActivity.class).setData(installUri));
+              new android.content.Intent(requireContext(), PluginInstallActivity.class)
+                  .setData(installUri));
         });
   }
 
