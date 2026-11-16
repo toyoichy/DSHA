@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Real Java admission for plugin-management full chains and worker upgrades.
 
-The retained V1 recipe/module is a source fixture, not a phone-data snapshot.
+The retained V1 recipe is a pinned historical source fixture, not a phone-data snapshot.
 Only Android UiText is stubbed; production patch algorithms are compiled as-is.
 """
 import argparse
@@ -175,9 +175,8 @@ def main():
             worker_rows = [row for row in chain if row[0] == WORKER]
             required_marker = 'DSHA_PLUGIN_BUNDLE_READ_WORKERS_V1' if args.expect_broken_current else 'DSHA_PLUGIN_BUNDLE_READ_WORKERS_V2'
             assert len(worker_rows) == 1 and worker_rows[0][2] == [required_marker], 'worker registry must identify the exact admitted generation'
-            # This pinned historical pre-worker proof predates the later argv
-            # routing repair. Keep the old bytes/hash; current-chain upgrade
-            # below still has to migrate them through the new recipe.
+            # This pre-worker fixture is derived from current DSH 0.2.2-rc.1 before
+            # the worker and argv patches; the current chain must upgrade it directly.
             pre_chain = [row for row in chain if row[0] not in {WORKER, 'plugin-pnpm-argv-patch.json'}]
             pre = runtime_stable_patches.apply(canonical, pre_chain)
             assert sha(pre) == PRE_WORKER_SHA, 'pre-worker actual managed source identity: ' + sha(pre)
