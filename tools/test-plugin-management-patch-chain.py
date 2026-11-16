@@ -22,9 +22,8 @@ import runtime_stable_patches
 ROOT = Path(__file__).resolve().parents[1]
 WORKER = 'plugin-bundle-proof-workers-patch.json'
 OLD_RECIPE_SHA = '466c61d0fc0d180cd4828fb981a0851cf1721ced023163cf7e17469e1144b681'
-# 模块字节随内置 DSH 上游与前序配方变化：build193（rc.3）时为 9f47fda9… / c1072ef0…，
-# 当前按 0.2.1-rc.5 canonical 与现行前序链重算。配方夹具本身（OLD_RECIPE_SHA）不变。
-OLD_MODULE_SHA = '8043321a15a77b0559a03165b253bf366ea04abc4397a808828d083e9c5d87ea'
+# Current pre-worker source is pinned to DSH 0.2.2-rc.1.
+# The V1 recipe is pinned to 0.2.1-rc.2 and is a fail-closed negative on this runtime.
 PRE_WORKER_SHA = '69ec30f2e69553b2ee3010af80d9d4887b90812588af7abbf8b13f2a1a3aa0ba'
 MANAGER = '@deepseek-ai/dsh-plugin-manager/lib/index.js'
 NEW_RECIPES = {WORKER, 'plugin-inventory-management-patch.json',
@@ -87,18 +86,17 @@ public final class PluginManagementChainFixture {
         require(ManagedPatchChain.apply(apk,chain,()->{throw new AssertionError("exact APK unexpectedly restored");}).equals(expected),"exact APK chain differs: "+name);
       }
       if (name.equals("@deepseek-ai/dsh-plugin-manager/lib/index.js")) {
-        String pre=Files.readString(module.resolve("pre-worker.js")),old=Files.readString(module.resolve("old-worker.js"));
+        String pre=Files.readString(module.resolve("pre-worker.js"));
         var historical=chain(module,"historical-chain");
-        require(ManagedPatchChain.apply(canonical,historical,()->{throw new AssertionError("old fresh restored");}).equals(old),"historical V1 module identity");
-        mustFail(old,historical,old,"PATCH_CHAIN_MISMATCH");
+        mustFail(pre,historical,null,"PATCH_CANONICAL_MISSING");
         restores.set(0);
         require(ManagedPatchChain.apply(pre,chain,()->{restores.incrementAndGet();return expected;}).equals(expected),"pre-worker upgrade differs");
         require(restores.get()==0,"pre-worker unexpectedly needed canonical");
         restores.set(0);
-        require(ManagedPatchChain.apply(old,chain,()->{restores.incrementAndGet();return expected;}).equals(expected),"broken V1 upgrade differs");
-        require(restores.get()==1,"broken V1 must restore whole current managed canonical once");
-        mustFail(old,chain,old,"PATCH_CHAIN_MISMATCH");
-        System.out.println("PASS_WORKER_UPGRADE historical-negative/pre-worker/V1/canonical-failclosed");
+        require(ManagedPatchChain.apply("invalid incomplete target",chain,()->{restores.incrementAndGet();return expected;}).equals(expected),"broken legacy state recovery differs");
+        require(restores.get()==1,"broken legacy state must restore whole current managed canonical once");
+        mustFail("invalid incomplete target",chain,"invalid canonical","PATCH_CHAIN_MISMATCH");
+        System.out.println("PASS_WORKER_UPGRADE historical-v1-rejected-on-current-runtime/pre-worker/current-canonical-failclosed");
       }
       System.out.println("PASS_CHAIN fresh/repeat/managed-canonical/failclosed "+name);
     }
@@ -184,12 +182,8 @@ def main():
             pre = runtime_stable_patches.apply(canonical, pre_chain)
             assert sha(pre) == PRE_WORKER_SHA, 'pre-worker actual managed source identity: ' + sha(pre)
             historical_row = (WORKER, [(item['before'], item['after']) for item in historical['patches']], ['DSHA_PLUGIN_BUNDLE_READ_WORKERS_V1'])
-            old_chain = pre_chain + [historical_row]
-            old = runtime_stable_patches.apply(canonical, old_chain)
-            assert sha(old) == OLD_MODULE_SHA, 'retained actual V1 managed module identity: ' + sha(old)
             (directory / 'pre-worker.js').write_bytes(pre)
-            (directory / 'old-worker.js').write_bytes(old)
-            write_chain(directory / 'historical-chain', old_chain)
+            write_chain(directory / 'historical-chain', [historical_row])
         records.append({'module': module, 'canonicalSha256': sha(canonical), 'currentSha256': sha(expected), 'recipes': [row[0] for row in chain]})
     if archive:
         archive.close()
