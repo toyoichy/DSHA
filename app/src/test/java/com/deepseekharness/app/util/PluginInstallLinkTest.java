@@ -34,6 +34,25 @@ public class PluginInstallLinkTest {
   }
 
   @Test
+  public void ourFreeModelReleaseLinkIsPinnedToUpstreamDigest() {
+    String url =
+        "https://github.com/Ebony-Vinyl/dsh-our-free-model/releases/download/v2.8.5/"
+            + "dsh-our-free-model-2.8.5.tgz";
+    String digest = "680d514addabaa4774b4d8c6114063f9b2bee65244637ab695383a3887e50232";
+    PluginInstallLink link =
+        PluginInstallLink.parse(
+            "dsha://install?url="
+                + java.net.URLEncoder.encode(url, java.nio.charset.StandardCharsets.UTF_8)
+                + "&sha256="
+                + digest
+                + "&name=dsh-our-free-model&version=2.8.5");
+    assertEquals(url, link.url);
+    assertEquals(digest, link.sha256);
+    assertEquals("dsh-our-free-model", link.name);
+    assertEquals("2.8.5", link.version);
+  }
+
+  @Test
   public void rejectsForeignHostsDuplicateFieldsAndCommands() {
     String[] invalid = {
       "https://evil.example/install/?url=https://example.com/a.zip",
