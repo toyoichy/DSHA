@@ -186,7 +186,7 @@ def main():
             historical_row = (WORKER, [(item['before'], item['after']) for item in historical['patches']], ['DSHA_PLUGIN_BUNDLE_READ_WORKERS_V1'])
             old_chain = pre_chain + [historical_row]
             old = runtime_stable_patches.apply(canonical, old_chain)
-            assert sha(old) == OLD_MODULE_SHA, 'retained actual V1 managed module identity'
+            assert sha(old) == OLD_MODULE_SHA, 'retained actual V1 managed module identity: ' + sha(old)
             (directory / 'pre-worker.js').write_bytes(pre)
             (directory / 'old-worker.js').write_bytes(old)
             write_chain(directory / 'historical-chain', old_chain)
