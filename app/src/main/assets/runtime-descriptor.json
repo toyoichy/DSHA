@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "runtimeId": "f7b99cc244b5099c2eddd529f208068dbd5239f265428f8e2f7fcbcc057a4ca4",
+  "runtimeId": "0b7910f3f72bed457438d5af925bc56fa429581b9079d23eaeb7b145612a10cd",
   "baseVersion": "10",
   "dshVersion": "0.2.2-rc.1",
   "launcherContract": "DSHA_ARM64_V2",
@@ -548,7 +548,7 @@
     "builtin-plugins/dsh-tool-vscreen/cordis.patch.yml": "48658efef5374dc8a9b52ae028e4f27b2ab3dd59991402706e356623335a66a2",
     "builtin-plugins/dsh-tool-vscreen/lib/bridge-port.cjs": "be413341075a0c23b34314c9a85ebcc032cc9d3dbd83a9298b3f631733869dd0",
     "builtin-plugins/dsh-tool-vscreen/lib/index.js": "f829bc458554cb34a523b012322354cea67023ed0d3642ef6700bedcf940e779",
-    "builtin-plugins/dsh-tool-vscreen/lib/server.cjs": "89a55f296aae54f766950ec6c885b92c24969233cf81b4fffd91288977ab16c1",
+    "builtin-plugins/dsh-tool-vscreen/lib/server.cjs": "d2eea5e5eea1403daaa2e27980a65a69029ba1dbf47ee137256279f4b207d327",
     "builtin-plugins/dsh-tool-vscreen/package.json": "e68384da7884ea0f01d229f4574dc31686f07f6fac76c17b41f43e0990395a87",
     "builtin-plugins/dsh-web-mobile/LICENSE": "0d50650e8ee0e00996facf70e6d246dddb836e27c4ce7027cdcf800ac5758f4b",
     "builtin-plugins/dsh-web-mobile/assets/icon.png": "a990114c169d3eca13f2755adcb3cfd61d5ec1c8e205154dab4c74b4f013bbb5",
