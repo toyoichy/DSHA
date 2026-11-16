@@ -680,7 +680,7 @@ public class PluginFragment extends Fragment {
   }
 
   /**
-   * One-tap entry for the upstream-signed Our Free Model release.
+   * One-tap entry for the pinned upstream Our Free Model release.
    * The native install screen still shows the package preview and requires user confirmation.
    */
   private void installOurFreeModelShortcut() {
