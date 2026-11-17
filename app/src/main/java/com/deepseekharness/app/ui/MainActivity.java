@@ -3,6 +3,7 @@ package com.deepseekharness.app.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -522,6 +523,13 @@ public class MainActivity extends AppCompatActivity {
             false);
 
     BottomNavigationView nav = findViewById(R.id.bottom_nav);
+    TextView sidebarButton = findViewById(R.id.btn_sidebar);
+    if (sidebarButton != null) {
+      sidebarButton.setText("☰");
+      sidebarButton.setContentDescription(
+          com.deepseekharness.app.util.UiText.choose("打开导航", "Open navigation"));
+      sidebarButton.setOnClickListener(v -> PhoneSidebar.show(this, nav));
+    }
     shellRail = findViewById(R.id.shell_rail);
     if (shellRail != null)
       shellRail.setOnItemSelectedListener(

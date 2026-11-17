@@ -478,6 +478,7 @@
     "app/src/main/java/com/deepseekharness/app/ui/PermissionCards.java",
     "app/src/main/java/com/deepseekharness/app/ui/PermissionChannelCard.java",
     "app/src/main/java/com/deepseekharness/app/ui/PermissionPanel.java",
+    "app/src/main/java/com/deepseekharness/app/ui/PhoneSidebar.java",
     "app/src/main/java/com/deepseekharness/app/ui/PictureInPictureActivity.java",
     "app/src/main/java/com/deepseekharness/app/ui/PictureInPictureFrame.java",
     "app/src/main/java/com/deepseekharness/app/ui/PluginCountBadge.java",
