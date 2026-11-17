@@ -522,6 +522,9 @@ public class MainActivity extends AppCompatActivity {
             false);
 
     BottomNavigationView nav = findViewById(R.id.bottom_nav);
+    View sidebarButton = findViewById(R.id.btn_sidebar);
+    if (sidebarButton != null)
+      sidebarButton.setOnClickListener(v -> PhoneSidebar.show(this, nav));
     shellRail = findViewById(R.id.shell_rail);
     if (shellRail != null)
       shellRail.setOnItemSelectedListener(
