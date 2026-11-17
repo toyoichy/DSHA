@@ -19,7 +19,7 @@ Scope: native Android presentation layer only. This document does not authorize 
 - `activity_main.xml` is the phone shell; `layout-sw600dp/activity_main.xml` is the tablet shell.
 - Existing navigation IDs are `nav_launch`, `nav_plugins`, `nav_settings`, and `nav_terminal`.
 - Existing theme infrastructure is palette-token based (`dsha_pal_*`, `shell_*`) with day/night resource variants. Reuse it.
-- The hidden/underlying `BottomNavigationView` is currently relied on by navigation code and tests. Do not remove it until all route consumers and tests are deliberately migrated.
+- The `BottomNavigationView` remains in both layouts as a hidden route controller because navigation code and tests rely on it. It is not removed; phone and tablet users navigate through the sidebar.
 
 ## Intended experience
 
@@ -27,7 +27,7 @@ Scope: native Android presentation layer only. This document does not authorize 
 - Replace the floating bottom navigation as the visible primary navigation with a collapsible/overlay sidebar opened from the app bar.
 - Sidebar contains the four existing destinations, selected state, accessible labels, and a clear close/back behavior.
 - Main content remains full-width when the sidebar is closed.
-- Keep a narrow, unobtrusive app-bar menu affordance with a 48dp minimum touch target.
+- Keep a narrow, unobtrusive app-bar menu affordance with a 48dp touch target.
 - Do not permanently reserve a wide navigation column on compact screens.
 
 ### Tablet / expanded width
@@ -51,12 +51,12 @@ Scope: native Android presentation layer only. This document does not authorize 
 
 ## Implementation sequence
 
-1. Add a compact-width sidebar controller/view that reuses the existing navigation IDs and delegates every selection to `MainActivity`.
-2. Wire the phone app bar menu affordance and accessible open/close behavior without changing route semantics.
-3. Keep `ShellRail` for expanded layouts; align its visual tokens with the new compact sidebar.
-4. Add/update unit and instrumentation tests for destination selection, back handling, state restoration, accessibility labels, and compact/expanded layouts.
-5. Run the repository's prescribed formatting, UI/i18n, unit-test, and build checks. Record any environment-only failures explicitly.
-6. Review the complete diff for unintended runtime, security, signing, or data-format changes before opening a draft PR.
+1. [x] Add a compact-width sidebar that reuses the existing navigation IDs and delegates every selection to `MainActivity`.
+2. [x] Wire the phone app-bar menu and rely on Dialog back/outside dismissal without changing route semantics.
+3. [x] Keep `ShellRail` for expanded layouts; use the same palette-driven selected-state drawable.
+4. [ ] Add/update unit and instrumentation tests for destination selection, back handling, state restoration, accessibility labels, and compact/expanded layouts.
+5. [ ] Run the repository's prescribed formatting, UI/i18n, unit-test, and build checks. Record environment-only failures explicitly.
+6. [x] Review scope: changes are limited to the phone layout, `MainActivity` menu wiring, the new sidebar class, and this design document.
 
 ## Acceptance checklist
 
