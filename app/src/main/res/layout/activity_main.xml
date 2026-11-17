@@ -6,7 +6,7 @@
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/shell_bg" android:orientation="vertical">
   <LinearLayout android:id="@+id/app_bar" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="@dimen/shell_header_min_height" android:gravity="center_vertical" android:orientation="horizontal" android:paddingStart="18dp" android:paddingEnd="12dp">
-    <TextView android:id="@+id/btn_sidebar" android:layout_width="48dp" android:layout_height="48dp" android:gravity="center" android:text="☰" android:textSize="23sp" android:textColor="@color/shell_text" android:background="?attr/selectableItemBackgroundBorderless" android:clickable="true" android:focusable="true" android:contentDescription="Open navigation" />
+    <TextView android:id="@+id/btn_sidebar" android:layout_width="48dp" android:layout_height="48dp" android:gravity="center" android:textSize="23sp" android:textColor="@color/shell_text" android:background="?attr/selectableItemBackgroundBorderless" android:clickable="true" android:focusable="true" android:contentDescription="@null" />
     <FrameLayout android:id="@+id/app_logo" android:layout_width="@dimen/shell_brand_size" android:layout_height="@dimen/shell_brand_size" android:background="@drawable/bg_shell_brand">
       <ImageView android:layout_width="@dimen/shell_brand_icon_size" android:layout_height="@dimen/shell_brand_icon_size" android:layout_gravity="center" android:contentDescription="@null" android:src="@drawable/ic_terminal" app:tint="@color/shell_accent" />
     </FrameLayout>
