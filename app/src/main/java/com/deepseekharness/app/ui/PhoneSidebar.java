@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -63,7 +62,8 @@ public final class PhoneSidebar {
       item.setMinimumHeight(dp(context, 56));
       item.setClickable(true);
       item.setFocusable(true);
-      item.setBackgroundResource(android.R.drawable.list_selector_background);
+      item.setBackgroundResource(R.drawable.bg_shell_rail_item);
+      item.setSelected(selected);
       ImageView icon = new ImageView(context);
       icon.setImageResource(icons[i]);
       icon.setColorFilter(context.getColor(selected
